@@ -59,9 +59,9 @@ function filterItems(e) {
     //convert to an array
     Array.from(items).forEach(function (item) {
         let itemName = item.firstChild.textContent;
-        if(itemName.toLowerCase().indexOf(text) !=-1){
+        if (itemName.toLowerCase().indexOf(text) != -1) {
             item.style.display = 'block';
-        }else {
+        } else {
             item.style.display = 'none';
         }
     });
