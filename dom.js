@@ -1,10 +1,12 @@
 let form = document.getElementById('addForm');
 let itemList = document.getElementById('items');
-
+let filter = document.getElementById('filter');
 // Form Submit event
 form.addEventListener('submit', addItem);
 //Delete Event 
 itemList.addEventListener('click', removeItem);
+//Filter Event
+filter.addEventListener("keyup", filterItems);
 
 
 //Add Item
@@ -38,12 +40,29 @@ function addItem(e) {
 
 //Remove Item
 
-function removeItem(e){
-    if(e.target.classList.contains('delete')){
-        if(confirm('Are you Sure?')){
+function removeItem(e) {
+    if (e.target.classList.contains('delete')) {
+        if (confirm('Are you Sure?')) {
             let li = e.target.parentElement;
             itemList.removeChild(li)
         }
     }
-    
+
+}
+
+//Filter Items
+function filterItems(e) {
+    //convert text to lowercase
+    let text = e.target.value.toLowerCase();
+    //Get li's
+    let items = itemList.getElementsByTagName('li');
+    //convert to an array
+    Array.from(items).forEach(function (item) {
+        let itemName = item.firstChild.textContent;
+        if(itemName.toLowerCase().indexOf(text) !=-1){
+            item.style.display = 'block';
+        }else {
+            item.style.display = 'none';
+        }
+    });
 }
